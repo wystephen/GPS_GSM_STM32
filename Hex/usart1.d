@@ -1,0 +1,13 @@
+..\Hex\usart1.o: ..\code\usart1.c
+..\Hex\usart1.o: ..\code\usart1.h
+..\Hex\usart1.o: ..\CMSIS\stm32f10x.h
+..\Hex\usart1.o: ..\CMSIS\core_cm3.h
+..\Hex\usart1.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+..\Hex\usart1.o: ..\CMSIS\system_stm32f10x.h
+..\Hex\usart1.o: ..\code\stm32f10x_conf.h
+..\Hex\usart1.o: ..\Libraries\inc\stm32f10x_gpio.h
+..\Hex\usart1.o: ..\CMSIS\stm32f10x.h
+..\Hex\usart1.o: ..\Libraries\inc\stm32f10x_rcc.h
+..\Hex\usart1.o: ..\Libraries\inc\stm32f10x_usart.h
+..\Hex\usart1.o: ..\Libraries\inc\misc.h
+..\Hex\usart1.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h

@@ -1,0 +1,14 @@
+..\Hex\gps.o: ..\code\gps.c
+..\Hex\gps.o: ..\code\gps.h
+..\Hex\gps.o: ..\code\delay.h
+..\Hex\gps.o: ..\CMSIS\stm32f10x.h
+..\Hex\gps.o: ..\CMSIS\core_cm3.h
+..\Hex\gps.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+..\Hex\gps.o: ..\CMSIS\system_stm32f10x.h
+..\Hex\gps.o: ..\code\stm32f10x_conf.h
+..\Hex\gps.o: ..\Libraries\inc\stm32f10x_gpio.h
+..\Hex\gps.o: ..\CMSIS\stm32f10x.h
+..\Hex\gps.o: ..\Libraries\inc\stm32f10x_rcc.h
+..\Hex\gps.o: ..\Libraries\inc\stm32f10x_usart.h
+..\Hex\gps.o: ..\Libraries\inc\misc.h
+..\Hex\gps.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h

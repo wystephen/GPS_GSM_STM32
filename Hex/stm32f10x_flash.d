@@ -1,0 +1,12 @@
+..\Hex\stm32f10x_flash.o: ..\Libraries\src\stm32f10x_flash.c
+..\Hex\stm32f10x_flash.o: ..\Libraries\inc\stm32f10x_flash.h
+..\Hex\stm32f10x_flash.o: ..\CMSIS\stm32f10x.h
+..\Hex\stm32f10x_flash.o: ..\CMSIS\core_cm3.h
+..\Hex\stm32f10x_flash.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+..\Hex\stm32f10x_flash.o: ..\CMSIS\system_stm32f10x.h
+..\Hex\stm32f10x_flash.o: ..\code\stm32f10x_conf.h
+..\Hex\stm32f10x_flash.o: ..\Libraries\inc\stm32f10x_gpio.h
+..\Hex\stm32f10x_flash.o: ..\CMSIS\stm32f10x.h
+..\Hex\stm32f10x_flash.o: ..\Libraries\inc\stm32f10x_rcc.h
+..\Hex\stm32f10x_flash.o: ..\Libraries\inc\stm32f10x_usart.h
+..\Hex\stm32f10x_flash.o: ..\Libraries\inc\misc.h

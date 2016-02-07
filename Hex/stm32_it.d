@@ -1,0 +1,13 @@
+..\Hex\stm32_it.o: ..\code\stm32_it.c
+..\Hex\stm32_it.o: ..\code\stm32_it.h
+..\Hex\stm32_it.o: ..\code\delay.h
+..\Hex\stm32_it.o: ..\CMSIS\stm32f10x.h
+..\Hex\stm32_it.o: ..\CMSIS\core_cm3.h
+..\Hex\stm32_it.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+..\Hex\stm32_it.o: ..\CMSIS\system_stm32f10x.h
+..\Hex\stm32_it.o: ..\code\stm32f10x_conf.h
+..\Hex\stm32_it.o: ..\Libraries\inc\stm32f10x_gpio.h
+..\Hex\stm32_it.o: ..\CMSIS\stm32f10x.h
+..\Hex\stm32_it.o: ..\Libraries\inc\stm32f10x_rcc.h
+..\Hex\stm32_it.o: ..\Libraries\inc\stm32f10x_usart.h
+..\Hex\stm32_it.o: ..\Libraries\inc\misc.h

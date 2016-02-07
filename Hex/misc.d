@@ -1,0 +1,12 @@
+..\Hex\misc.o: ..\Libraries\src\misc.c
+..\Hex\misc.o: ..\Libraries\inc\misc.h
+..\Hex\misc.o: ..\CMSIS\stm32f10x.h
+..\Hex\misc.o: ..\CMSIS\core_cm3.h
+..\Hex\misc.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+..\Hex\misc.o: ..\CMSIS\system_stm32f10x.h
+..\Hex\misc.o: ..\code\stm32f10x_conf.h
+..\Hex\misc.o: ..\Libraries\inc\stm32f10x_gpio.h
+..\Hex\misc.o: ..\CMSIS\stm32f10x.h
+..\Hex\misc.o: ..\Libraries\inc\stm32f10x_rcc.h
+..\Hex\misc.o: ..\Libraries\inc\stm32f10x_usart.h
+..\Hex\misc.o: ..\Libraries\inc\misc.h
