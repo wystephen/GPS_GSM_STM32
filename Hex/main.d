@@ -12,5 +12,5 @@
 ..\Hex\main.o: ..\code\usart2.h
 ..\Hex\main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
 ..\Hex\main.o: ..\code\usart1.h
-..\Hex\main.o: ..\code\gps.h
 ..\Hex\main.o: ..\code\delay.h
+..\Hex\main.o: ..\code\gps.h

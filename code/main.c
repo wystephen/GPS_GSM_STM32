@@ -10,6 +10,8 @@
 #include "gps.h"
 #include "delay.h"
 
+//#include <stdio.h>
+
 #define Power_Key_GPIO_Down GPIO_ResetBits(GPIOB, GPIO_Pin_13)
 #define Power_Key_GPIO_Up GPIO_SetBits(GPIOB, GPIO_Pin_13)
 #define Yes		1
@@ -18,6 +20,7 @@
 unsigned char GPS_Data_Temp[256];
 gps_process_data gps;
 
+ char imei[100] ;
 /********≤‚ ‘GSM «∑Ò∆Ù∂Ø**********/
 //unsigned char test_boot;
 /********≤‚ ‘GSM «∑Ò◊¢≤·Õ¯¬Á**********/
@@ -60,6 +63,8 @@ void Power_GPIO_Config(void)
 
 int main(void)
 {	
+	//*imei = (unsigned char*)molloc(sizeof(unsigned char)*100);
+	//printf("ok~test");
 	//test_boot= No;
 	//test_net_register = No;
 	//test_TCP = No;
@@ -84,7 +89,8 @@ int main(void)
 		DELAY_MS(5000);		
 		test_boot = Yes;
 	}
-	
+	USART_SendData(USART1, 0x1A);
+
 	//≤‚ ‘SIMø® «∑Ò“—æ≠◊¢≤·Õ¯¬Á
 	while(test_net_register==No)
 	{
@@ -113,7 +119,11 @@ int main(void)
 	DELAY_MS(10000);
 	//while(test_TCP==No);
 	
-	Usart1_Send("AT+CIPSEND\r\n");
+	//USART_SendData(USART1, 0x1A);
+
+	Get_IMEI(imei);//≤È—Ø IMEI 
+	
+	//Usart1_Send("AT+CIPSEND\r\n");
 	DELAY_MS(1000);
 	
 	while(1)
@@ -129,6 +139,11 @@ int main(void)
 		if(gps.fixmode==3)	
 		{
 			Usart1_Send("AT+CIPSEND\r\n");
+				
+			//Usart1_Send("IMEI------------");
+			Usart1_Send(imei);
+			//Usart1_Send("\r\n");
+			
 			GPS_Show();
 		}
 	}

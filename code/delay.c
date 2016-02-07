@@ -43,6 +43,9 @@ void DELAY_MS(__IO u32 Time)
 	while(SysTick_Config(SystemCoreClock/1000));	
 	TimingDelay = Time;	
 	SysTick->CTRL |=  SysTick_CTRL_ENABLE_Msk;						//打开定时器
+
+
+
 	while(TimingDelay != 0);															//等待1秒完成	
 }
 

@@ -10,4 +10,4 @@
 ..\Hex\usart1.o: ..\Libraries\inc\stm32f10x_rcc.h
 ..\Hex\usart1.o: ..\Libraries\inc\stm32f10x_usart.h
 ..\Hex\usart1.o: ..\Libraries\inc\misc.h
-..\Hex\usart1.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+..\Hex\usart1.o: ..\code\delay.h
