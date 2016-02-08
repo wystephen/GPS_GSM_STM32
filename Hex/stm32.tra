@@ -42,7 +42,7 @@
 ### ADS-LD Output File: '..\Hex\stm32.axf'
 ### ADS-LD Command File: '..\Hex\stm32.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '..\Hex\stm32.lnp', Handle=0x00001130
+### Creating CmdFile '..\Hex\stm32.lnp', Handle=0x00000A08
 ### Writing '.lnp' file
 ### ADS-LD Command file '..\Hex\stm32.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.

@@ -145,14 +145,66 @@ void Get_IMEI(unsigned char str[100])
 		}
 	}
 }
+int ISOK(void){
+	int t_i;
+
+	for (t_i = 0;t_i < GSM_Buf_index;t_i++)
+	{
+		if(GSM_Buf[t_i] == 'O' && GSM_Buf[t_i + 1] == 'K')
+		{
+			return 1;
+		}
+	}
+	return 0;
+	
+}
+
 //GSM_消息发送
-void GSM_Msg_Send(unsigned char *str)
+int GSM_Msg_Send(unsigned char *str)
 {
-	Usart1_Send("AT+CIPSEND\r\r");
-	DELAY_MS(800);
-	Usart1_Send(str);
-	USART_SendData(USART1,0x1A);
-	DELAY_MS(1000);
+	int error_times;
+	error_times = 0;
+	
+	while(1)
+	{
+		GSM_Buf_index =0;
+		GSM_Buf_read_index = 0;
+		Usart1_Send("AT+CIPSEND\r\r");
+	
+		Usart1_Send(str);
+		USART_SendData(USART1,0x1A);
+		
+		//while(GSM_Buf_index < GSM_Buf_read_index +2)
+		//{
+		//}
+		DELAY_MS(800);
+		if(ISOK())
+			return 0; 
+		error_times ++;
+		if(error_times>3)
+		{
+			return 1;
+		}
+		
+	}		
 }
 	
+
+//检测是否开机
+int  GSM_Is_Boot(void)
+{
+	GSM_Buf_index = 0;
+	GSM_Buf_read_index = 0;
+	Usart1_Send("AT\r\n");
+	DELAY_MS(500);
+	if(GSM_Buf_index > GSM_Buf_read_index)
+	{
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
+
+
 	
