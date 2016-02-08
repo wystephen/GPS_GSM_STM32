@@ -20,7 +20,7 @@
 unsigned char GPS_Data_Temp[256];
 gps_process_data gps;
 
- char imei[100] ;
+ unsigned char imei[100] = {0} ;
 /********测试GSM是否启动**********/
 //unsigned char test_boot;
 /********测试GSM是否注册网络**********/
@@ -44,8 +44,9 @@ void GPS_Show()
 	//}
 	sprintf((char *)outbuf,"Latitude:%.5f,Longitude:%.5f\r\n",la/=100000,lo/=100000);		//得到经纬度字符串 
 	
-	Usart1_Send(outbuf);
-	USART_SendData(USART1, 0x1A);
+	//Usart1_Send(outbuf);
+	//USART_SendData(USART1, 0x1A);
+	GSM_Msg_Send(outbuf);
 	DELAY_MS(5000);
 
 }
@@ -82,7 +83,7 @@ int main(void)
 	DELAY_MS(10000);
 	Power_Key_GPIO_Down;
 	
-	//测试是否已经开机
+	/*/测试是否已经开机
 	while(test_boot==No)
 	{
 		Usart1_Send("AT\r\n");
@@ -118,13 +119,14 @@ int main(void)
 	
 	DELAY_MS(10000);
 	//while(test_TCP==No);
+	*/
 	
 	//USART_SendData(USART1, 0x1A);
 
 	Get_IMEI(imei);//查询 IMEI 
 	
 	//Usart1_Send("AT+CIPSEND\r\n");
-	DELAY_MS(1000);
+	//DELAY_MS(1000);
 	
 	while(1)
 	{
@@ -138,10 +140,11 @@ int main(void)
 		}
 		if(gps.fixmode==3)	
 		{
-			Usart1_Send("AT+CIPSEND\r\n");
+			//Usart1_Send("AT+CIPSEND\r\n");
 				
 			//Usart1_Send("IMEI------------");
-			Usart1_Send(imei);
+			//Usart1_Send(imei);
+			GSM_Msg_Send(imei);
 			//Usart1_Send("\r\n");
 			
 			GPS_Show();

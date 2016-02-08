@@ -144,4 +144,13 @@ void Get_IMEI(unsigned char str[100])
 		}
 	}
 }
+//
+void GSM_Msg_Send(unsigned char *str)
+{
+	Usart1_Send("AT+CIPSEND\r\r");
+	DELAY_MS(800);
+	Usart1_Send(str);
+	USART_SendData(USART1,0x1A);
+}
+	
 	

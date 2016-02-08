@@ -17,7 +17,7 @@ void Usart1_Send(unsigned char *str);
 void Data_Process(void);
 
 void Get_IMEI(unsigned char str[100]);
-
+void GSM_Msg_Send(unsigned char *str);
 /*char GSM_Buf[1024] = {0};
 unsigned int GSM_Buf_index  = 0;
 unsigned int GSM_Buf_msg = 0;
