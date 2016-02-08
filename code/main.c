@@ -52,8 +52,12 @@ void GPS_Show()
 	//GSM_Msg_Send(outbuf);
 	//sprintf((char *)outbuf,"lat:%.*s,lon:%.*s",gps.r_lat_len,gps.r_latitude,gps.r_lon_len,gps.r_longitude);
 	//GSM_Send_Error +=
-	sprintf((char *)outbuf,"{\"IMEI\":\"%.15s\",\"lng\":\"%.*s\",\"lat\":\"%.*s\"}\r\n",
+	/*sprintf((char *)outbuf,"{\"IMEI\":\"%.15s\",\"lng\":\"%.*s\",\"lat\":\"%.*s\"}\r\n",
 	imei,
+	gps.r_lon_len,gps.r_longitude,
+	gps.r_lat_len,gps.r_latitude);*/
+	sprintf((char *)outbuf,"{\"lng\":\"%.*s\",\"lat\":\"%.*s\"}\r\n",
+	//imei,
 	gps.r_lon_len,gps.r_longitude,
 	gps.r_lat_len,gps.r_latitude);
 	
@@ -174,7 +178,8 @@ int main(void)
 	Get_IMEI(imei);//²éÑ¯ IMEI 
 	GSM_Msg_Send(imei);
 
-	
+	GPS_Ana_Error =0;
+	GPS_Get_Error = 0;
 	while(1)
 	{
 		if(GPS_Stop_flag==1)
@@ -200,7 +205,7 @@ int main(void)
 		}
 		GPS_Ana_Error ++;
 		GPS_Get_Error ++;
-		if(GPS_Ana_Error > 20 || GPS_Get_Error > 20)
+		if((GPS_Ana_Error > 20) || (GPS_Get_Error > 20))
 		{
 			char buf_t[100];
 			sprintf(buf_t,"Get_Error:%d,Ana_Error:%d",GPS_Get_Error,GPS_Ana_Error);

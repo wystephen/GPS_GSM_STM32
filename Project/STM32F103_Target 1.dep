@@ -1,5 +1,5 @@
 Dependencies for Project 'STM32F103', Target 'Target 1': (DO NOT MODIFY !)
-F (..\code\main.c)(0x56B8AC1A)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\code -I..\Libraries\inc -I..\Libraries\src -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\ST\STM32F10x -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210E_EVAL -o "..\Hex\main.o" --omf_browse "..\Hex\main.crf" --depend "..\Hex\main.d")
+F (..\code\main.c)(0x56B8B190)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CMSIS -I..\code -I..\Libraries\inc -I..\Libraries\src -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\ST\STM32F10x -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210E_EVAL -o "..\Hex\main.o" --omf_browse "..\Hex\main.crf" --depend "..\Hex\main.d")
 I (..\CMSIS\stm32f10x.h)(0x4D782EA4)
 I (..\CMSIS\core_cm3.h)(0x4D522D48)
 I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x4EB0D284)
