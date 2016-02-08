@@ -76,6 +76,11 @@ void USART2_IRQHandler(void)
 	unsigned char Data_char_usart2;	
 	if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
 	{
+		if(GPS_Stop_flag == 1)
+		{
+			Data_char_usart2 = USART2->DR;
+			return;
+		}
 		Data_char_usart2=USART2->DR;
 		if(Data_char_usart2=='$')
 		{

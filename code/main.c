@@ -32,21 +32,28 @@ gps_process_data gps;
 void GPS_Show()
 {
 	float la,lo;
-	__align(4) unsigned char outbuf[50]; 
+	__align(4) unsigned char outbuf[100]; 
 	
 	la=gps.latitude;
 	lo=gps.longitude;
-	//while(la > 360.0 || lo > 360.0){
-	//	DELAY_MS(1000);
-	//	Usart1_Send("error");
-	//	la = gps.latitude;
-	//	lo = gps.longitude;
-	//}
-	sprintf((char *)outbuf,"Latitude:%.5f,Longitude:%.5f\r\n",la/=100000,lo/=100000);		//得到经纬度字符串 
-	
-	//Usart1_Send(outbuf);
-	//USART_SendData(USART1, 0x1A);
+	/*if(la > 360.0 || lo > 360.0){
+		DELAY_MS(1000);
+	GSM_Msg_Send("error");
+	la = gps.latitude;
+	lo = gps.longitude;
+		//return;
+	}-----------------*/
+	//sprintf((char *)outbuf,"Latitude:%.5f,Longitude:%.5f\r\n%.15s\r\n",la/=100000,lo/=100000,imei);		//得到经纬度字符串 
+	//注意，附带的代码解算出的数据精确度有较大误差。有时候甚至偏离很远。
+	if(gps.latitude/100000 > 360.0 || gps.longitude/100000 > 360.0)
+	{
+		GSM_Msg_Send("ERROR\0");
+	}
+	sprintf((char *)outbuf,"{\"IMEI\":\"%.15s\",\"lng\":\"%.5f\",\"lat\":\"%.5f\"}\r\n",imei,lo/=100000,la/=100000);	
 	GSM_Msg_Send(outbuf);
+	sprintf((char *)outbuf,"lat:%.*s,lon:%.*s",gps.r_lat_len,gps.r_latitude,gps.r_lon_len,gps.r_longitude);
+	GSM_Msg_Send(outbuf);
+	GSM_Msg_Send(gps.sourcedata);
 	DELAY_MS(5000);
 
 }
@@ -83,7 +90,7 @@ int main(void)
 	DELAY_MS(10000);
 	Power_Key_GPIO_Down;
 	
-	/*/测试是否已经开机
+	//测试是否已经开机
 	while(test_boot==No)
 	{
 		Usart1_Send("AT\r\n");
@@ -118,35 +125,23 @@ int main(void)
 	Usart1_Send("AT+CIPSTART=\"TCP\",\"120.25.218.92\",\"9919\"\r\n");//change to our own server.
 	
 	DELAY_MS(10000);
-	//while(test_TCP==No);
-	*/
-	
-	//USART_SendData(USART1, 0x1A);
 
 	Get_IMEI(imei);//查询 IMEI 
-	
-	//Usart1_Send("AT+CIPSEND\r\n");
-	//DELAY_MS(1000);
+	GSM_Msg_Send(imei);
+
 	
 	while(1)
 	{
 		if(GPS_Stop_flag==1)
 		{
-			int i;
-			GPS_Stop_flag=0;			
+			int i;			
 			for(i=0;i<256;i++)
 				GPS_Data_Temp[i]=GPS_Uart2_Data[i];
+			GPS_Stop_flag=0;
 			GPS_Analysis(&gps,(u8*)GPS_Data_Temp);//分析字符串			
 		}
 		if(gps.fixmode==3)	
 		{
-			//Usart1_Send("AT+CIPSEND\r\n");
-				
-			//Usart1_Send("IMEI------------");
-			//Usart1_Send(imei);
-			GSM_Msg_Send(imei);
-			//Usart1_Send("\r\n");
-			
 			GPS_Show();
 		}
 	}

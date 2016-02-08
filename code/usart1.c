@@ -104,8 +104,9 @@ void USART1_IRQHandler(void)
 		}
 		
 		GSM_Buf_index  = GSM_Buf_index + 1;
-		//if (GSM_Buf_index >= BUFF_SIZE){
-			//GSM_Buf_index /= BUFF_SIZE;
+		if (GSM_Buf_index >= BUFF_SIZE){
+			GSM_Buf_index = GSM_Buf_index % BUFF_SIZE;
+		}
 		
 	}	
 }
@@ -144,13 +145,14 @@ void Get_IMEI(unsigned char str[100])
 		}
 	}
 }
-//
+//GSM_ÏûÏ¢·¢ËÍ
 void GSM_Msg_Send(unsigned char *str)
 {
 	Usart1_Send("AT+CIPSEND\r\r");
 	DELAY_MS(800);
 	Usart1_Send(str);
 	USART_SendData(USART1,0x1A);
+	DELAY_MS(1000);
 }
 	
 	

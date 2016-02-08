@@ -19,6 +19,8 @@ void GPS_Analysis(gps_process_data *gps_data,unsigned char *buf)
 		GPRMC_Analysis(gps_data,buf);
 	if((strstr((const char *)buf,"$GPGSA")))//GPGSA解析	
 		GPGSA_Analysis(gps_data,buf);
+	if((strstr((const char *)buf,"$GPGLL")))
+		GPGLL_Analysis(gps_data,buf);
 }
 
 /********************************************************************************************
@@ -56,11 +58,59 @@ void GPGGA_Analysis(gps_process_data *gps_data,unsigned char *buf)
 ********************************************************************************************/
 void GPRMC_Analysis(gps_process_data *gps_data,unsigned char *buf)
 {
-	unsigned char *address_buf,end_buf,decimal_places;		 
-	unsigned long int temp;	   
+	unsigned char *add,*address_buf,end_buf,decimal_places;		 
+	unsigned long int temp;	  
+	unsigned int seg_time=0;
+	unsigned int seg_num[12];
+	int i=0;
+	int j=0;
 	float rs;  
 	address_buf =(unsigned char*)strstr((const char *)buf,"GPRMC");
 
+	//插入一段 直接 字符串提取试试~
+	add=address_buf;
+	
+	for(i = 0;seg_time<6&&i<70;i++){
+		if(*(add+i) == ','){
+			seg_num[seg_time] = i;
+			seg_time++;	
+		}
+		if(seg_time == 4){
+			for(j=0;j<(seg_num[seg_time-1]-seg_num[seg_time-2]-1);j++)
+			{
+				gps_data->r_latitude[j] = *(add +(seg_num[seg_time-2]+j+1));
+				if(gps_data->r_latitude[j] == '.'&& j>1)//这里j>1有待商榷
+				{
+					gps_data->r_latitude[j] = gps_data->r_latitude[j-1];
+					gps_data->r_latitude[j-1] = gps_data->r_latitude[j-2];
+					gps_data->r_latitude[j-2] = '.';
+					
+				}
+			}
+			gps_data->r_lat_len=j+1;
+		}
+		if(seg_time == 6)
+		{
+			for(j=0;j<(seg_num[seg_time-1]-seg_num[seg_time-2]-1);j++)
+			{
+				gps_data->r_longitude[j] = *(add +(seg_num[seg_time-2]+j+1));
+				if(gps_data->r_longitude[j] == '.'&& j>1)
+				{
+					gps_data->r_longitude[j] = gps_data->r_longitude[j-1];
+					gps_data->r_longitude[j-1] = gps_data->r_longitude[j-2];
+					gps_data->r_longitude[j-2] = '.';
+				}
+			}
+			gps_data->r_lon_len = j+1;
+		}
+		gps_data->sourcedata[i] = *(add+i);
+	}
+	gps_data->sourcedata[99] = '\0';
+	
+	
+	
+	
+	//到这里
 	end_buf=Data_Removal(address_buf,3);																			//数据去除								
 	if(end_buf!=0XFF)
 	{
@@ -89,6 +139,15 @@ void GPRMC_Analysis(gps_process_data *gps_data,unsigned char *buf)
 	if(end_buf!=0XFF)
 		gps_data->ewhemi=*(address_buf+end_buf);																//东经还是西经		 
 }  
+void GPGLL_Analysis(gps_process_data *gps_data,unsigned char *buf)
+{
+	unsigned char *address_buf,end_buf,decimal_places;
+	unsigned long int temp;
+	float rs;
+	address_buf = (unsigned char *)strstr((const char *)buf,"GPGLL");
+	
+	
+}
 
 /********************************************************************************************
 解析GPGSA数据

@@ -37,8 +37,13 @@ __packed typedef struct
 	gps_utc_time utc;									//UTC时间
 	unsigned char svnum;							//可见卫星数
 	unsigned long int latitude;			//纬度 分扩大100000倍,实际要除以100000
+	unsigned char sourcedata[100];
+	unsigned char r_latitude[20];
+	unsigned int r_lat_len;
 	unsigned char nshemi;						//北纬/南纬,N:北纬;S:南纬				  
 	unsigned long int longitude;		  //经度 分扩大100000倍,实际要除以100000
+	unsigned char r_longitude[20];
+	unsigned int	r_lon_len;
 	unsigned char ewhemi;						//东经/西经,E:东经;W:西经
 	unsigned char gpssta;						//GPS状态:0,未定位;1,非差分定位;2,差分定位;6,正在估算.				  
  	unsigned char posslnum;					//用于定位的卫星数,0~12.
@@ -53,4 +58,5 @@ void GPGSV_Analysis(gps_process_data *gps_data,unsigned char *buf);
 void GPGGA_Analysis(gps_process_data *gps_data,unsigned char *buf);
 void GPRMC_Analysis(gps_process_data *gps_data,unsigned char *buf);
 void GPGSA_Analysis(gps_process_data *gps_data,unsigned char *buf);
+void GPGLL_Analysis(gps_process_data *gps_data,unsigned char *buf);
 #endif  
